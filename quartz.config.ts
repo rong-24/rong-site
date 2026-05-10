@@ -8,26 +8,26 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Quartz 4",
+    pageTitle: "Rong's Digital Garden",
     pageTitleSuffix: "",
-    enableSPA: true,
-    enablePopovers: true,
-    analytics: {
-      provider: "plausible",
-    },
-    locale: "en-US",
-    baseUrl: "quartz.jzhao.xyz",
-    ignorePatterns: ["private", "templates", ".obsidian"],
+    enableSPA: true,// Set to false to disable client-side navigation and page transitions
+    enablePopovers: true,// Set to false to disable the "Copy Link" button in the popover
+    analytics: null, // Add your analytics tracking code here (e.g., Google Analytics, Plausible)
+    locale: "zh-CN",
+    baseUrl: "rong-24.github.io/rong-site",// The base URL of your site, used for generating absolute URLs for assets and links
+    ignorePatterns: ["private", "templates", ".obsidian"],// An array of glob patterns to exclude files or folders from the build process
     defaultDateType: "modified",
     theme: {
       fontOrigin: "googleFonts",
       cdnCaching: true,
-      typography: {
+      
+      typography: {// Customize your site's typography by specifying fonts for headers, body text, and code blocks
         header: "Schibsted Grotesk",
         body: "Source Sans Pro",
         code: "IBM Plex Mono",
       },
-      colors: {
+      
+      colors: {// Define color schemes for light and dark modes, including primary, secondary, and highlight colors
         lightMode: {
           light: "#faf8f8",
           lightgray: "#e5e5e5",
@@ -55,11 +55,11 @@ const config: QuartzConfig = {
   },
   plugins: {
     transformers: [
-      Plugin.FrontMatter(),
-      Plugin.CreatedModifiedDate({
+      Plugin.FrontMatter(),// Extract metadata from the front matter of markdown files and make it available for use in templates and other plugins
+      Plugin.CreatedModifiedDate({// Automatically extract created and modified dates for content files using multiple strategies, including front matter, Git history, and filesystem timestamps
         priority: ["frontmatter", "git", "filesystem"],
       }),
-      Plugin.SyntaxHighlighting({
+      Plugin.SyntaxHighlighting({// Add syntax highlighting to code blocks in markdown files using Shiki, with support for light and dark themes
         theme: {
           light: "github-light",
           dark: "github-dark",
@@ -73,7 +73,7 @@ const config: QuartzConfig = {
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
     ],
-    filters: [Plugin.RemoveDrafts()],
+    filters: [Plugin.RemoveDrafts()],// Exclude markdown files with "draft: true" in their front matter from the build output
     emitters: [
       Plugin.AliasRedirects(),
       Plugin.ComponentResources(),
@@ -89,7 +89,7 @@ const config: QuartzConfig = {
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
       // Comment out CustomOgImages to speed up build time
-      Plugin.CustomOgImages(),
+      //Plugin.CustomOgImages(),
     ],
   },
 }
